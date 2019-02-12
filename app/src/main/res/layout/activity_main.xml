@@ -7,6 +7,20 @@
     android:id="@+id/background"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/lumInput"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:hint="light"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/hslButton"
+        app:layout_constraintStart_toEndOf="@+id/satInput"
+        app:layout_constraintTop_toBottomOf="@+id/blueInput" />
+
     <TextView
         android:id="@+id/colorInstruction"
         android:layout_width="wrap_content"
@@ -21,63 +35,114 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/hslInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="188dp"
+        android:id="@+id/hueInput"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="HSL"
+        android:hint="hue"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/hslButton"
-        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintEnd_toStartOf="@+id/satInput"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colorInstruction" />
+        app:layout_constraintTop_toBottomOf="@+id/redInput" />
+
+
+    <EditText
+        android:id="@+id/satInput"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="sat"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/lumInput"
+        app:layout_constraintStart_toEndOf="@+id/hueInput"
+        app:layout_constraintTop_toBottomOf="@+id/greenInput" />
 
     <Button
         android:id="@+id/hslButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
-        android:layout_marginEnd="36dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="44dp"
         android:onClick="changeColorHSL"
         android:text="GO!"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colorInstruction" />
+        app:layout_constraintTop_toBottomOf="@+id/rgbButton" />
 
     <EditText
-        android:id="@+id/rgbInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="108dp"
+        android:id="@+id/redInput"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="28dp"
         android:ems="10"
-        android:hint="RGB"
+        android:hint="red"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/rgbButton"
-        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintBottom_toTopOf="@+id/hueInput"
+        app:layout_constraintEnd_toStartOf="@+id/greenInput"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colorInstruction" />
+        app:layout_constraintTop_toBottomOf="@+id/hexInput"
+        app:layout_constraintVertical_bias="0.732" />
+
+    <EditText
+        android:id="@+id/greenInput"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="28dp"
+        android:ems="10"
+        android:hint="green"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/hueInput"
+        app:layout_constraintEnd_toStartOf="@+id/blueInput"
+        app:layout_constraintStart_toEndOf="@+id/redInput"
+        app:layout_constraintTop_toBottomOf="@+id/hexInput"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/blueInput"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="28dp"
+        android:ems="10"
+        android:hint="blue"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/hueInput"
+        app:layout_constraintEnd_toStartOf="@+id/rgbButton"
+        app:layout_constraintStart_toEndOf="@+id/greenInput"
+        app:layout_constraintTop_toBottomOf="@+id/hexInput" />
 
     <Button
         android:id="@+id/rgbButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="36dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="28dp"
         android:onClick="changeColorRGB"
         android:text="GO!"
+        app:layout_constraintBottom_toTopOf="@+id/hslButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colorInstruction" />
+        app:layout_constraintTop_toBottomOf="@+id/hexButton" />
 
     <EditText
         android:id="@+id/hexInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Hexadecimal"
@@ -86,15 +151,19 @@
         app:layout_constraintHorizontal_bias="0.342"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/colorInstruction" />
+
     <Button
         android:id="@+id/hexButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="36dp"
         android:onClick="changeColorHexadecimal"
         android:text="GO!"
+        app:layout_constraintBottom_toTopOf="@+id/rgbButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/hexInput"
         app:layout_constraintTop_toBottomOf="@+id/colorInstruction" />
 
 </android.support.constraint.ConstraintLayout>
