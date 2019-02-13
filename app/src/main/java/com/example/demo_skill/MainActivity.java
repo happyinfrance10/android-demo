@@ -35,18 +35,62 @@ public class MainActivity extends AppCompatActivity {
         return Integer.toString(result);
     }
 
-    private int luminance(String red, String green, String blue){
-        return 0;
+    private String luminance(int red, int green, int blue){
+        int min, max;
+        if(red>blue){
+            max = Integer.max(red, green);
+            min = Integer.min(green, blue);
+        } else {
+            max = Integer.max(blue, green);
+            min = Integer.min(green, red);
+        }
+        double lum = (max+min)/51.0;
+        int result = (int) Math.round(lum+0.5);
+        return Integer.toString(result);
+    }
+    private String saturation(int red, int green, int blue){
+//        int min, max;
+//        if(red>blue){
+//            max = Integer.max(red, green);
+//            min = Integer.min(green, blue);
+//        } else {
+//            max = Integer.max(blue, green);
+//            min = Integer.min(green, red);
+//        }
+//        double lum = (max+min)/51.0;
+//        int result = (int) Math.round(lum+0.5);
+//        return Integer.toString(result);
+        return "";
+    }
+    private String hue(int red, int green, int blue){
+//        int min, max;
+//        if(red>blue){
+//            max = Integer.max(red, green);
+//            min = Integer.min(green, blue);
+//        } else {
+//            max = Integer.max(blue, green);
+//            min = Integer.min(green, red);
+//        }
+//        double lum = (max+min)/51.0;
+//        int result = (int) Math.round(lum+0.5);
+//        return Integer.toString(result);
+        return "";
     }
     public void changeColorHexadecimal(View view){
         String color = m_hexInput.getText().toString();
         String red = hexToDec(color.substring(1, 3));
         String green = hexToDec(color.substring(3, 5));
         String blue = hexToDec(color.substring(5, 7));
-
         m_redInput.setText(red);
         m_greenInput.setText(green);
         m_blueInput.setText(blue);
+
+        int r = Integer.parseInt(red);
+        int g = Integer.parseInt(green);
+        int b = Integer.parseInt(blue);
+        m_lumInput.setText(luminance(r, g, b));
+        m_hueInput.setText(hue(r, g, b));
+        m_satInput.setText(saturation(r, g, b));
 
         //        Log.i("MainActivity", "test");
         m_background.setBackgroundColor(Color.parseColor(color));
