@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             max = Integer.max(blue, green);
             min = Integer.min(green, red);
         }
-        double lum = (max+min)/51.0;
+        double lum = (max+min)/5.1;
         int result = (int) Math.round(lum+0.5);
         return Integer.toString(result);
     }
