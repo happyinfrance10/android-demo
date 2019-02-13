@@ -34,47 +34,65 @@ public class MainActivity extends AppCompatActivity {
         int result = Integer.parseInt(hex, 16);
         return Integer.toString(result);
     }
-
+    private int maxOfThree(int a, int b, int c){
+        if(a>b)
+            return Integer.max(a,c);
+        else
+            return Integer.max(b,c);
+    }
+    private int minOfThree(int a, int b, int c){
+        if(a<b)
+            return Integer.min(a,c);
+        else
+            return Integer.min(b,c);
+    }
     private String luminance(int red, int green, int blue){
-        int min, max;
-        if(red>blue){
-            max = Integer.max(red, green);
-            min = Integer.min(green, blue);
-        } else {
-            max = Integer.max(blue, green);
-            min = Integer.min(green, red);
-        }
+        int min = minOfThree(red, green, blue);
+        int max = maxOfThree(red, green, blue);
         double lum = (max+min)/5.1;
-        int result = (int) Math.round(lum+0.5);
+        int result = (int) Math.round(lum);
         return Integer.toString(result);
     }
     private String saturation(int red, int green, int blue){
-//        int min, max;
-//        if(red>blue){
-//            max = Integer.max(red, green);
-//            min = Integer.min(green, blue);
-//        } else {
-//            max = Integer.max(blue, green);
-//            min = Integer.min(green, red);
-//        }
-//        double lum = (max+min)/51.0;
-//        int result = (int) Math.round(lum+0.5);
-//        return Integer.toString(result);
-        return "";
+        int min = minOfThree(red, green, blue);
+        int max = maxOfThree(red, green, blue);
+        if(min==max)
+            return "0";
+        else if(Integer.parseInt(luminance(red,green,blue))<50){
+            double result = ((max-min)*100.0)/(max+min);
+            int sat = (int) Math.round(result);
+            return Integer.toString(sat);
+        }
+        else{
+            double result = ((max-min)*100.0)/(510-max-min);
+            int sat = (int) Math.round(result);
+            return Integer.toString(sat);
+        }
     }
     private String hue(int red, int green, int blue){
-//        int min, max;
-//        if(red>blue){
-//            max = Integer.max(red, green);
-//            min = Integer.min(green, blue);
-//        } else {
-//            max = Integer.max(blue, green);
-//            min = Integer.min(green, red);
-//        }
-//        double lum = (max+min)/51.0;
-//        int result = (int) Math.round(lum+0.5);
-//        return Integer.toString(result);
-        return "";
+        int min = minOfThree(red, green, blue);
+        int max = maxOfThree(red, green, blue);
+        if(min==max)
+            return "0";
+        else if(max==red){
+            double result = ((green-blue)*60.0)/(max-min);
+            int h = (int) Math.round(result);
+            if(h<0)
+                h+=360;
+            return Integer.toString(h);
+        }else if(max==green){
+            double result = ((blue-red)*60.0)/(max-min) + 120;
+            int h = (int) Math.round(result);
+            if(h<0)
+                h+=360;
+            return Integer.toString(h);
+        } else{
+            double result = ((red-green)*60.0)/(max-min) + 240;
+            int h = (int) Math.round(result);
+            if(h<0)
+                h+=360;
+            return Integer.toString(h);
+        }
     }
     public void changeColorHexadecimal(View view){
         String color = m_hexInput.getText().toString();
