@@ -114,16 +114,18 @@ public class MainActivity extends AppCompatActivity {
         m_background.setBackgroundColor(Color.parseColor(color));
     }
     public void changeColorRGB(View view){
-//        String color = m_rgbInput.getText().toString();
-//        String rgbColor = color.substring(1, color.length()-1);
-//        String values[] = rgbColor.split(" ,");
-//        int r = Integer.parseInt(values[0]);
-//        int g = Integer.parseInt(values[1]);
-//        int b = Integer.parseInt(values[2]);
-////        Log.i("MainActivity", "test");
-//        String hexResult="#"+Integer.toHexString(r)+Integer.toHexString(g)+Integer.toHexString(b);
-//        m_hexInput.setText(hexResult);
-//        m_background.setBackgroundColor(Color.parseColor(hexResult));
+        String red = m_redInput.getText().toString();
+        String green = m_greenInput.getText().toString();
+        String blue = m_blueInput.getText().toString();
+        String color = "#"+decToHex(red)+decToHex(green)+decToHex(blue);
+        int r = Integer.parseInt(red);
+        int g = Integer.parseInt(green);
+        int b = Integer.parseInt(blue);
+        m_lumInput.setText(luminance(r, g, b));
+        m_hueInput.setText(hue(r, g, b));
+        m_satInput.setText(saturation(r, g, b));
+        m_hexInput.setText(color);
+        m_background.setBackgroundColor(Color.parseColor(color));
     }
     public void changeColorHSL(View view){
 //        String color = m_hslInput.getText().toString();
