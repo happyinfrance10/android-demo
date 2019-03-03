@@ -27,7 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
     private String decToHex(String dec){
         int converter = Integer.parseInt(dec);
-        return Integer.toHexString(converter);
+        String result = Integer.toHexString(converter);
+        if(result.length()==1){
+            return "0"+result;
+        } else{
+            return result;
+        }
     }
 
     private String hexToDec(String hex){
@@ -132,8 +137,17 @@ public class MainActivity extends AppCompatActivity {
         String hue = m_hueInput.getText().toString();
         String sat = m_satInput.getText().toString();
         String lum = m_lumInput.getText().toString();
+        if(Integer.parseInt(sat)==0){
+            int s = (int) Math.round(Integer.parseInt(lum)*2.55);
+            String scale = Integer.toString(s);
+            m_redInput.setText(scale);
+            m_greenInput.setText(scale);
+            m_blueInput.setText(scale);
+            String color = "#"+decToHex(scale)+decToHex(scale)+decToHex(scale);
+
+        } else {
+
+        }
 //        m_background.setBackgroundColor(Color.parseColor(color));
     }
-
-
 }
