@@ -166,4 +166,16 @@
         app:layout_constraintStart_toEndOf="@+id/hexInput"
         app:layout_constraintTop_toBottomOf="@+id/colorInstruction" />
 
+    <TextView
+        android:id="@+id/errorMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Invalid input"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lumInput" />
+
 </android.support.constraint.ConstraintLayout>

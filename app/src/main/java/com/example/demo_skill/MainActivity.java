@@ -25,16 +25,18 @@ public class MainActivity extends AppCompatActivity {
         m_background = (ConstraintLayout) findViewById(R.id.background);
     }
 
-    private String decToHex(String dec){
+    private boolean invalidRange(String input, int min, int max){
+        return false;
+    }
+    private String decToHex(String dec) {
         int converter = Integer.parseInt(dec);
         String result = Integer.toHexString(converter);
-        if(result.length()==1){
-            return "0"+result;
-        } else{
+        if (result.length() == 1) {
+            return "0" + result;
+        } else {
             return result;
         }
     }
-
     private String hexToDec(String hex){
         int result = Integer.parseInt(hex, 16);
         return Integer.toString(result);
@@ -99,6 +101,23 @@ public class MainActivity extends AppCompatActivity {
             return Integer.toString(h);
         }
     }
+    private double hslBasesToRGB(double rgb, double conv1, double conv2){
+        while(rgb < 0.0){
+            rgb++;
+        }
+        while(rgb > 1.0){
+            rgb--;
+        }
+        if(6.0*rgb < 1.0){
+            return conv2 + (conv1-conv2)*6.0*rgb;
+        } else if (2.0*rgb < 1.0) {
+            return conv1;
+        } else if (3.0*rgb < 2.0){
+            return conv2 + (conv1-conv2)*((2.0/3)-rgb)*6.0;
+        } else {
+            return conv2;
+        }
+    }
     public void changeColorHexadecimal(View view){
         String color = m_hexInput.getText().toString();
         String red = hexToDec(color.substring(1, 3));
@@ -137,17 +156,40 @@ public class MainActivity extends AppCompatActivity {
         String hue = m_hueInput.getText().toString();
         String sat = m_satInput.getText().toString();
         String lum = m_lumInput.getText().toString();
+        if(invalidRange(hue, 0, 360) || invalidRange(sat, 0, 100)|| invalidRange(lum, 0, 100)){
+            return;
+        }
+        String color;
         if(Integer.parseInt(sat)==0){
             int s = (int) Math.round(Integer.parseInt(lum)*2.55);
             String scale = Integer.toString(s);
             m_redInput.setText(scale);
             m_greenInput.setText(scale);
             m_blueInput.setText(scale);
-            String color = "#"+decToHex(scale)+decToHex(scale)+decToHex(scale);
-
+            color = "#"+decToHex(scale)+decToHex(scale)+decToHex(scale);
         } else {
-
+            double temp1;
+            double n_lum = Integer.parseInt(lum)/100.0;
+            double n_sat = Integer.parseInt(sat)/100.0;
+            if(n_lum<50){
+                temp1 = (n_lum*(1.0+ n_sat));
+            } else {
+                temp1 = (n_lum + n_sat) - (n_lum *n_sat);
+            }
+            double temp2 = 2*n_lum - temp1;
+            double n_hue = Integer.parseInt(hue)/360.0;
+            double base_r = n_hue + (1.0/3);
+            double base_g = n_hue;
+            double base_b = n_hue - (1.0/3);
+            int r = (int) Math.round(255.0*(hslBasesToRGB(base_r, temp1, temp2)));
+            int g = (int) Math.round(255.0*(hslBasesToRGB(base_g, temp1, temp2)));
+            int b = (int) Math.round(255.0*(hslBasesToRGB(base_b, temp1, temp2)));
+            color = "#"+decToHex(Integer.toString(r))+decToHex(Integer.toString(g))+decToHex(Integer.toString(b));
+            m_redInput.setText(Integer.toString(r));
+            m_greenInput.setText(Integer.toString(g));
+            m_blueInput.setText(Integer.toString(b));
         }
-//        m_background.setBackgroundColor(Color.parseColor(color));
+        m_hexInput.setText(color);
+        m_background.setBackgroundColor(Color.parseColor(color));
     }
 }
