@@ -6,11 +6,13 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText m_hexInput, m_redInput, m_greenInput, m_blueInput, m_hueInput, m_satInput, m_lumInput;
     ConstraintLayout m_background;
+    TextView m_errorMsg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,9 +25,14 @@ public class MainActivity extends AppCompatActivity {
         m_satInput = (EditText) findViewById(R.id.satInput);
         m_lumInput = (EditText) findViewById(R.id.lumInput);
         m_background = (ConstraintLayout) findViewById(R.id.background);
+        m_errorMsg = (TextView) findViewById(R.id.errorMsg);
     }
 
     private boolean invalidRange(String input, int min, int max){
+        int value = Integer.parseInt(input);
+        if(value>max || value<min) {
+            return true;
+        }
         return false;
     }
     private String decToHex(String dec) {
@@ -141,6 +148,21 @@ public class MainActivity extends AppCompatActivity {
         String red = m_redInput.getText().toString();
         String green = m_greenInput.getText().toString();
         String blue = m_blueInput.getText().toString();
+        if(invalidRange(red, 0, 255)){
+            m_errorMsg.setText(R.string.inval_r);
+            m_errorMsg.setVisibility(View.VISIBLE);
+            return;
+        } else if (invalidRange(green, 0, 255)){
+            m_errorMsg.setText(R.string.inval_g);
+            m_errorMsg.setVisibility(View.VISIBLE);
+            return;
+        } else if ( invalidRange(blue, 0, 255)){
+            m_errorMsg.setText(R.string.inval_b);
+            m_errorMsg.setVisibility(View.VISIBLE);
+            return;
+        } else {
+            m_errorMsg.setVisibility(View.INVISIBLE);
+        }
         String color = "#"+decToHex(red)+decToHex(green)+decToHex(blue);
         int r = Integer.parseInt(red);
         int g = Integer.parseInt(green);

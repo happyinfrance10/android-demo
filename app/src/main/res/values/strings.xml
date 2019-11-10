@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">demo_skill</string>
+    <string name="inval_r">Invalid value for red: must be from 0-255</string>
+    <string name="inval_g">Invalid value for green: must be from 0-255</string>
+    <string name="inval_b">Invalid value for blue: must be from 0-255</string>
+
 </resources>
